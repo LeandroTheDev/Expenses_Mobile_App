@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projeto/models/transactions.dart';
+import 'package:intl/intl.dart';
 
 //Inicialização do Aplicativo
 void main() {
@@ -25,7 +26,7 @@ class HomePage extends StatelessWidget {
   final _transactions = [
     Transaction(
       id: "t1", 
-      title: "Te amo lara", 
+      title: "Porta Malas", 
       value: 310.80, 
       date: DateTime.now(),
     ),
@@ -87,7 +88,7 @@ class HomePage extends StatelessWidget {
 
                     //Textos da direita
                     child: Text(
-                      tr.value.toString(),
+                      "R\$ ${tr.value.toStringAsFixed(2)}",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -101,12 +102,15 @@ class HomePage extends StatelessWidget {
                     children: [                   
                       Text(tr.title,
                         style: TextStyle(
-                        color: Colors.grey
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text(tr.date.toString(),
+                      Text(DateFormat('d MMM y').format(tr.date),
                         style: TextStyle(
                         color: Colors.grey,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
