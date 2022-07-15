@@ -22,17 +22,20 @@ class Expense extends StatelessWidget {
 //Criação da Página Inicial
 class HomePage extends StatelessWidget {
 
+  final titleController = TextEditingController();
+  final valueController = TextEditingController();
+
 //Informações do Historico de compras
   final _transactions = [
     Transaction(
       id: "t1", 
-      title: "Porta Malas", 
+      title: "Trunk", 
       value: 310.80, 
       date: DateTime.now(),
     ),
     Transaction(
       id: "t2", 
-      title: "Pneu Velho", 
+      title: "Old Tire", 
       value: 2000.00, 
       date: DateTime.now(),
     ),
@@ -44,13 +47,12 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: Text("Dinheiro"),
+        title: Text("Money"),
       ),
 
 
       //Criação da coluna
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           //Criação dos blocos
@@ -58,7 +60,7 @@ class HomePage extends StatelessWidget {
           Container(
             child: Card(
               color: Colors.purple,
-              child: Text("Tabela"),
+              child: Text("Table"),
               elevation: 5,
             ),
           ),
@@ -66,7 +68,7 @@ class HomePage extends StatelessWidget {
 
           //Criação do Historico de compras
           //Bloco 2
-          Column(
+        Column(
             children: _transactions.map((tr) {
               return Card(
               child: Row(
@@ -120,6 +122,34 @@ class HomePage extends StatelessWidget {
               ),
               );
             }).toList(),
+          ),
+          Card(
+            elevation: 5,
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                children: [
+                  TextField(
+                    controller: titleController,
+                    decoration: InputDecoration(
+                      labelText: "Title",
+                    ),
+                  ),
+                  TextField(
+                    controller: valueController,
+                    decoration: InputDecoration(
+                      labelText: "Price R\$",
+                    ),
+                  ),
+                  TextButton(
+                    child: Text("New Transaction",),
+                    style: TextButton.styleFrom(primary: Colors.purpleAccent),
+                    onPressed: (){
+                    },
+                  )
+                ],
+              ),
+            )
           )
         ],
       ),
