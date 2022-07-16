@@ -23,6 +23,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context){
+    //Criação da barra de cima
     return Scaffold(
       appBar: AppBar(
         title: Text("Money"),
@@ -30,21 +31,23 @@ class HomePage extends StatelessWidget {
 
 
       //Criação da coluna
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          //Criação dos blocos
-          //Bloco 1
-          Container(
-            child: Card(
-              color: Colors.purple,
-              child: Text("Table"),
-              elevation: 5,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            //Criação dos blocos
+            //Bloco 1
+            Container(
+              child: Card(
+                color: Colors.purple,
+                child: Text("Table"),
+                elevation: 5,
+              ),
             ),
-          ),
-          //Chamada para criação do historico
-          TransactionUser(),
-        ],
+            //Chamada do sistema
+            TransactionUser(),
+          ],
+        ),
       ),
     );
   }
