@@ -1,4 +1,4 @@
-name: expenses
+name: projeto
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -29,6 +29,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  intl: 0.17.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -73,13 +74,16 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
+  fonts:
+    - family: koulen
+      fonts:
+        - asset: assets/fonts/Koulen-Regular.ttf
+          weight: 400
+    - family: rubik
+      fonts:
+        - asset: assets/fonts/RubikMoonrocks-Regular.ttf
+          weight: 400
+  # - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
