@@ -13,10 +13,11 @@ class TransactionList extends StatelessWidget {
     return //Criação do Historico de compras
         //Bloco 2
     Container(
-      height: 380,
-      child: SingleChildScrollView(
-        child: Column(
-          children: transactions.map((tr) {
+      height: 300,
+      child: ListView.builder(
+        itemCount: transactions.length,
+        itemBuilder: (ctx, index) {
+          final tr = transactions[index];
             return Card(
               child: Row(
                 children: [
@@ -30,14 +31,15 @@ class TransactionList extends StatelessWidget {
                     decoration: BoxDecoration(
                         border: Border.all(
                       color: Colors.purple,
-                      width: 2,
+                      width: 4,
                     )),
       
                     //Textos da direita
                     child: Text("R\$ ${tr.value.toStringAsFixed(2)}",
                         style: TextStyle(
+                          fontFamily: 'rubik',
                           fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                          fontSize: 17,
                           color: Colors.purple,
                         )),
                     padding: EdgeInsets.all(10),
@@ -48,6 +50,7 @@ class TransactionList extends StatelessWidget {
                       Text(
                         tr.title,
                         style: TextStyle(
+                          fontFamily: 'koulen',
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
@@ -55,19 +58,19 @@ class TransactionList extends StatelessWidget {
                       Text(
                         DateFormat('d MMM y').format(tr.date),
                         style: TextStyle(
+                          fontFamily: 'koulen',
                           color: Colors.grey,
-                          fontSize: 16,
+                          fontSize: 13,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
             );
-          }).toList(),
+         },
         ),
-      ),
-    );
+      );
   }
 }
