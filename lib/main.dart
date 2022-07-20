@@ -5,6 +5,7 @@ import 'dart:math';
 import 'components/transactions_form.dart';
 import 'components/transactions_list.dart';
 import '../models/transactions.dart';
+import 'components/chart.dart';
 
 //Inicialização do Aplicativo
 void main() {
@@ -56,6 +57,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   //Informações do Historico de compras
   final List<Transaction> _transactions = [];
+
+
+  //Verifica se as transações são do periodo de uma semana
+  List<Transaction> get _recentTransactions {
+    return _transactions.where((tr) {
+      return tr.date.isAfter(DateTime.now().subtract(
+        Duration(days: 7),
+      ));
+    }).toList();
+  }
 
   //Codigo para adicionar uma transação nova
   _addTransaction(String title, double value) {
@@ -112,11 +123,8 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               //Criação do grafico
-              Card(
-                color: Colors.purple,
-                child: Text("Table"),
-                elevation: 5,
-              ),
+              Chart(_recentTransactions),
+              //Criação do historico
               TransactionList(_transactions),
             ],
           ),
