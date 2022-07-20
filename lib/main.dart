@@ -1,3 +1,4 @@
+// ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:projeto/components/transactions_form.dart';
 import 'dart:math';
@@ -12,11 +13,12 @@ void main() {
 
 //Chamada da Página Inicial para a função Aplicativo
 class Expense extends StatelessWidget {
+  const Expense({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final ThemeData tema = ThemeData();
     return MaterialApp(
-
       home: HomePage(),
       theme: tema.copyWith(
         colorScheme: tema.colorScheme.copyWith(
@@ -45,26 +47,15 @@ class Expense extends StatelessWidget {
 
 //Criação da Página Inicial
 class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
   //Informações do Historico de compras
-  final _transactions = [
-    Transaction(
-      id: "t1",
-      title: "Trunk",
-      value: 310.80,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: "t2",
-      title: "Old Tire",
-      value: 2000.00,
-      date: DateTime.now(),
-    ),
-  ];
+  final List<Transaction> _transactions = [];
 
   //Codigo para adicionar uma transação nova
   _addTransaction(String title, double value) {
@@ -95,6 +86,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     //Criação da barra de cima
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text("Money"),
         actions: <Widget>[
@@ -106,21 +98,28 @@ class _HomePageState extends State<HomePage> {
       ),
 
       //Criação da coluna
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            //Criação dos blocos
-            //Bloco 1
-            Container(
-              child: Card(
+      body: Container(
+        height: 1000,
+        width: 1000,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/waiting.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              //Criação do grafico
+              Card(
                 color: Colors.purple,
                 child: Text("Table"),
                 elevation: 5,
               ),
-            ),
-            TransactionList(_transactions),
-          ],
+              TransactionList(_transactions),
+            ],
+          ),
         ),
       ),
 
@@ -129,7 +128,7 @@ class _HomePageState extends State<HomePage> {
         child: Icon(Icons.add),
         onPressed: () => _openTransactionFormModal(context),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }

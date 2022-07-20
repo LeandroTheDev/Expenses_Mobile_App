@@ -1,10 +1,10 @@
+// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
 class TransactionForm extends StatefulWidget {
   final void Function(String, double) onSubmit;
 
-  TransactionForm(this.onSubmit);
+  TransactionForm(this.onSubmit,
+   {Key? key}) : super(key: key);
 
   @override
   State<TransactionForm> createState() => _TransactionFormState();
