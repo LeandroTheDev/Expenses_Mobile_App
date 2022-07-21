@@ -6,8 +6,9 @@ import 'package:intl/intl.dart';
 class TransactionList extends StatelessWidget {
   
   final List<Transaction> transactions;
+  final void Function(String) onRemove;
 
-  TransactionList(this.transactions,
+  TransactionList(this.transactions, this.onRemove,
    {Key? key}) : super(key: key);
 
   @override
@@ -23,10 +24,10 @@ class TransactionList extends StatelessWidget {
             return Card(
               margin: EdgeInsets.symmetric(
                 horizontal: 0,
-                vertical: 0,
+                vertical: 5,
               ),
-              color: Color.fromARGB(0, 184, 33, 243),
-              elevation: 0,
+              color: Color.fromARGB(120, 184, 33, 243),
+              elevation: 1,
               child: ListTile(
                 leading: CircleAvatar(
                   backgroundColor: Colors.purple,
@@ -70,6 +71,11 @@ class TransactionList extends StatelessWidget {
                     fontFamily: 'koulen',
                     color: Colors.black,
                   ),
+                ),
+                trailing: IconButton(
+                  icon: Icon(Icons.delete),
+                  color: Colors.red,
+                  onPressed: () => onRemove(tr.id),
                 ),
               ),
             );

@@ -1,7 +1,8 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 class TransactionForm extends StatefulWidget {
-  final void Function(String, double) onSubmit;
+  final void Function(String, double, DateTime) onSubmit;
 
   TransactionForm(this.onSubmit,
    {Key? key}) : super(key: key);
@@ -11,9 +12,13 @@ class TransactionForm extends StatefulWidget {
 }
 
 class _TransactionFormState extends State<TransactionForm> {
+  double cont = 50.0;
+
   final titleController = TextEditingController();
 
   final valueController = TextEditingController();
+
+  DateTime selectedDate = DateTime.now();
 
   _submitForm() {
     final title = titleController.text;
@@ -21,7 +26,22 @@ class _TransactionFormState extends State<TransactionForm> {
     if(title.isEmpty || value <= 0){
       return;
     }
-    widget.onSubmit(title, value);
+    widget.onSubmit(title, value, selectedDate);
+  }
+
+  _showDatePicker(){
+    showDatePicker(context: context,
+     initialDate: DateTime.now(),
+     firstDate: DateTime(2021),
+     lastDate: DateTime.now(),
+     ).then((pickedDate){
+      if(pickedDate == null){
+        return;
+      }
+      setState(() {
+        selectedDate = pickedDate;
+      });
+     });
   }
 
   @override
@@ -53,15 +73,52 @@ class _TransactionFormState extends State<TransactionForm> {
                   labelText: "Price R\$",
                 ),
               ),
-              TextButton(
-                child: Text(
-                  "New Transaction",
-                  style: TextStyle(
-                    fontFamily: 'koulen',
-                  ),
+              SizedBox(
+                height: cont,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                          'Data Selecionada: ${DateFormat('dd/MM/y').format(selectedDate)}',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontFamily: 'koulen',
+                      ),
+                      ),
+                    ),
+                    TextButton(
+                      child: Text(
+                      'Select Data',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontFamily: 'koulen',
+                      ),
+                      ),
+                      onPressed: _showDatePicker,
+                    ),
+                  ],
                 ),
-                style: TextButton.styleFrom(primary: Colors.purpleAccent),
-                onPressed: _submitForm,
+              ),
+              SizedBox(
+                height: 100,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      color: Colors.purple,
+                      child: TextButton(
+                        child: Text(
+                          "New Transaction",
+                          style: TextStyle(
+                            fontFamily: 'koulen',
+                          ),
+                        ),
+                        style: TextButton.styleFrom(primary: Colors.white),
+                        onPressed: _submitForm,
+                      ),
+                    ),
+                  ],
+                ),
               )
             ],
           ),

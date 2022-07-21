@@ -56,14 +56,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //Informações do Historico de compras
-  final List<Transaction> _transactions = [
-    Transaction(
-      id: 't0',
-      title: 'Teste',
-      value: 100.00,
-      date: DateTime.now().subtract(const Duration(days: 1)),
-    ),
-  ];
+  final List<Transaction> _transactions = [];
 
 
   //Verifica se as transações são do periodo de uma semana
@@ -76,12 +69,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   //Codigo para adicionar uma transação nova
-  _addTransaction(String title, double value) {
+  _addTransaction(String title, double value, DateTime date) {
     final newTransaction = Transaction(
       id: Random().nextDouble().toString(),
       title: title,
       value: value,
-      date: DateTime.now(),
+      date: date,
     );
 
     setState(() {
@@ -89,6 +82,14 @@ class _HomePageState extends State<HomePage> {
     });
 
     Navigator.of(context).pop();
+  }
+
+  _removeTransaction(String id) {
+    setState(() {
+    _transactions.removeWhere((tr) {
+      return tr.id == id;
+      });
+    });
   }
 
   //Metodo para chamar a pagina de adicionar transações
@@ -132,7 +133,7 @@ class _HomePageState extends State<HomePage> {
               //Criação do grafico
               Chart(_recentTransactions),
               //Criação do historico
-              TransactionList(_transactions),
+              TransactionList(_transactions, _removeTransaction),
             ],
           ),
         ),
