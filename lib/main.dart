@@ -56,7 +56,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //Informações do Historico de compras
-  final List<Transaction> _transactions = [];
+  final List<Transaction> _transactions = [
+    Transaction(
+      id: 't0',
+      title: 'Teste',
+      value: 100.00,
+      date: DateTime.now().subtract(const Duration(days: 1)),
+    ),
+  ];
 
 
   //Verifica se as transações são do periodo de uma semana

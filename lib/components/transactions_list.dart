@@ -21,95 +21,56 @@ class TransactionList extends StatelessWidget {
         itemBuilder: (ctx, index) {
           final tr = transactions[index];
             return Card(
-              color: Colors.red.withOpacity(0),
-              child: Row(
-                children: [
-                  Container(
-                    //Numeros a esquerda
-                    margin: EdgeInsets.symmetric(
-                      horizontal: 15,
-                      vertical: 10,
+              margin: EdgeInsets.symmetric(
+                horizontal: 0,
+                vertical: 0,
+              ),
+              color: Color.fromARGB(0, 184, 33, 243),
+              elevation: 0,
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: Colors.purple,
+                  radius: 30,
+                  child: Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: FittedBox(
+                      child: Text(
+                        tr.value.toStringAsFixed(2)
+                      ),
                     ),
-      
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                      color: Colors.purple,
-                      width: 4,
-                    )),
-      
-                    //Valores dos numeros a esquerda
-                    child: Stack(
-                      children: [
-                        Text(
-                          "R\$ ${tr.value.toStringAsFixed(2)}",
-                          style: TextStyle(
-                            fontFamily: 'rubik',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 17,
-                            foreground: Paint()
-                            ..style = PaintingStyle.stroke
-                            ..strokeWidth = 1.5
-                            ..color = Colors.white
-                          ),
-                        ),
-                        Text(
-                          "R\$ ${tr.value.toStringAsFixed(2)}",
-                          style: TextStyle(
-                            fontFamily: 'rubik',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 17,
-                            color: Colors.purple,
-                          )),
-                      ]),
-                    padding: EdgeInsets.all(10),
                   ),
-                  //Textos a direita
-                  Column(
-
-                    //Nome do item
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                        Stack(
-                        children: [
-                          Text(
-                            tr.title,
-                            style: TextStyle(
-                              fontFamily: 'koulen',
-                              fontSize: 20,
-                              letterSpacing: 1.3,
-                              fontWeight: FontWeight.bold,
-                              foreground: Paint()
-                                ..style = PaintingStyle.stroke
-                                ..strokeWidth = 1.8
-                                ..color = Colors.white  
-                            ),
-                          ),
-                          
-                          Text(
-                          tr.title,
-                          style: TextStyle(
-                            fontFamily: 'koulen',
-                            fontSize: 20,
-                            letterSpacing: 1.3,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.purple,
-                          ),
-                        )],
+                ),
+                title: Stack(
+                  children: [
+                    Text(
+                      tr.title,
+                      style: TextStyle(
+                        fontFamily: 'rubik',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        foreground: Paint()
+                        ..style = PaintingStyle.stroke
+                        ..strokeWidth = 1.5
+                        ..color = Colors.white
                       ),
-                      
-                      //Data do item
-                      Text(
-                        DateFormat('d MMM y').format(tr.date),
-                        style: TextStyle(
-                          fontFamily: 'koulen',
-                          color: Colors.grey,
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                        ),
                       ),
-                    ],
+                    Text(
+                      tr.title,
+                      style: TextStyle(
+                        fontFamily: 'rubik',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
+                subtitle: Text(
+                  DateFormat('d MMM y').format(tr.date),  
+                  style: TextStyle(
+                    fontFamily: 'koulen',
+                    color: Colors.black,
                   ),
-                ],
+                ),
               ),
             );
          },
