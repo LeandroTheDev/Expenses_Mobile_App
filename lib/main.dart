@@ -104,9 +104,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     //Criação da barra de cima
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
+    final appBar = AppBar(
         title: Text("Money"),
         actions: <Widget>[
           IconButton(
@@ -114,8 +112,15 @@ class _HomePageState extends State<HomePage> {
             onPressed: () => _openTransactionFormModal(context),
           )
         ],
-      ),
+      );
+    //Calculo do tamanho
+    final availableHeight = MediaQuery.of(context).size.height - 
+    appBar.preferredSize.height - 
+    MediaQuery.of(context).padding.top;
 
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: appBar,
       //Criação da coluna
       body: Container(
         height: 1000,
@@ -131,20 +136,17 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               //Criação do grafico
-              Chart(_recentTransactions),
+              SizedBox(
+                height: availableHeight * 0.3,
+                child: Chart(_recentTransactions)),
               //Criação do historico
-              TransactionList(_transactions, _removeTransaction),
+              SizedBox(
+                height: availableHeight * 0.7,
+                child: TransactionList(_transactions, _removeTransaction)),
             ],
           ),
         ),
       ),
-
-      //Botão para chamar adicionar transações
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () => _openTransactionFormModal(context),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }

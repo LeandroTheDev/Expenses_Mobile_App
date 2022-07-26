@@ -16,7 +16,6 @@ class TransactionList extends StatelessWidget {
     return //Criação do Historico de compras
         //Bloco 2
     SizedBox(
-      height: 500,
       child: ListView.builder(
         itemCount: transactions.length,
         itemBuilder: (ctx, index) {
